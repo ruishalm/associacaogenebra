@@ -1,4 +1,5 @@
 /* Estilos Globais */
+
 * {
     box-sizing: border-box;
 }
@@ -481,11 +482,4 @@ footer {
     .gallery-grid {
         grid-template-columns: 1fr; /* Uma coluna para a galeria em telas menores */
     }
-}
-
-.footer-personal-logo img.footer-logo {
-    height: 40px; /* Ajuste o tamanho conforme necessário */
-    width: auto;
-    margin-left: 10px; /* Espaçamento entre o texto e o logo */
-    vertical-align: middle; /* Alinha o logo com o texto */
 }
