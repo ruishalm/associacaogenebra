@@ -60,7 +60,7 @@ header {
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Empurra os itens para as extremidades */
+    justify-content: center; /* Centraliza os itens horizontalmente */
     width: 100%; /* Garante que o contêiner ocupe a largura total */
     gap: 20px;
     margin-bottom: 15px;
@@ -70,7 +70,6 @@ header h1 {
     color: var(--cor-texto-claro);
     font-size: 3em;
     margin: 0;
-    margin-left: 20px; /* Adiciona uma margem à esquerda para separar do logo */
     font-weight: 700;
 }
 
@@ -357,23 +356,25 @@ footer {
 
 #about {
     background-color: var(--cor-primaria);
-    color: var(--cor-secundaria); /* Alterado para verde claro, conforme solicitado */
-    padding: 40px 20px;
+    color: var(--cor-texto-claro); /* Branco para melhor contraste */
+    padding: 20px 20px; /* Ajustado para menor */
     border-radius: 10px;
     text-align: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 40px auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 #about h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
+    font-size: 2em; /* Ajustado para menor */
+    margin-bottom: 10px; /* Ajustado para menor */
+    color: var(--cor-terciaria);
 }
 
 #about p {
-    font-size: 1.4em; /* Aumentado o texto */
-    line-height: 1.7; /* Aumentado o espaçamento */
-    font-weight: 500; /* Levemente mais destacado */
+    font-size: 1em; /* Ajustado para menor */
+    line-height: 1.6; /* Ajustado para menor */
+    font-weight: 400;
 }
 
 #highlights {
@@ -428,6 +429,14 @@ footer {
 .highlight-text {
     flex: 2;
     text-align: left;
+}
+
+.highlight-text p {
+    margin: 0 0 15px 0;
+    padding: 0;
+    white-space: normal; /* Garante a quebra de linha */
+    word-wrap: break-word; /* Quebra palavras longas se necessário */
+    font-size: 1.1em;
 }
 
 .news-detail-image {
