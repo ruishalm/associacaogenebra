@@ -357,7 +357,7 @@ footer {
 #about {
     background-color: var(--cor-primaria);
     color: var(--cor-texto-claro); /* Branco para melhor contraste */
-    padding: 20px 20px; /* Ajustado para menor */
+    padding: 30px 25px; /* Ajustado */
     border-radius: 10px;
     text-align: center;
     max-width: 900px;
@@ -366,14 +366,14 @@ footer {
 }
 
 #about h2 {
-    font-size: 2em; /* Ajustado para menor */
-    margin-bottom: 10px; /* Ajustado para menor */
+    font-size: 2.4em; /* Ajustado */
+    margin-bottom: 15px; /* Ajustado */
     color: var(--cor-terciaria);
 }
 
 #about p {
-    font-size: 1em; /* Ajustado para menor */
-    line-height: 1.6; /* Ajustado para menor */
+    font-size: 1.1em; /* Ajustado */
+    line-height: 1.7; /* Ajustado */
     font-weight: 400;
 }
 
@@ -439,10 +439,53 @@ footer {
     font-size: 1.1em;
 }
 
-.news-detail-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 15px;
+
+/* --- Media Queries --- */
+@media screen and (max-width: 768px) {
+    header h1 {
+        font-size: 1.5em; /* Reduz ainda mais o tamanho do título em telas menores */
+    }
+
+    .header-content {
+        flex-direction: column; /* Empilha o logo e o título verticalmente */
+        gap: 10px;
+    }
+
+    nav ul {
+        flex-direction: row; /* Coloca os itens da navegação em uma única linha */
+        flex-wrap: wrap; /* Permite quebra de linha se necessário */
+        justify-content: center; /* Centraliza os itens */
+        padding: 5px 0; /* Reduz o padding */
+    }
+
+    nav li {
+        margin: 0 5px; /* Ajusta a margem para espaçamento horizontal */
+    }
+
+    nav a {
+        font-size: 0.8em; /* Reduz o tamanho do texto da navegação */
+    }
+
+    .news-item {
+        flex-basis: 90%; /* Notícias ocupam quase a largura total em telas menores */
+    }
+
+    .highlight-content {
+        flex-direction: column; /* Empilha imagem e texto do destaque verticalmente */
+    }
+
+    .highlight-image {
+        max-width: 80%; /* Ajusta o tamanho da imagem de destaque */
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr; /* Uma coluna para a galeria em telas menores */
+    }
 }
 
+.footer-personal-logo img.footer-logo {
+    height: 40px; /* Ajuste o tamanho conforme necessário */
+    width: auto;
+    margin-left: 10px; /* Espaçamento entre o texto e o logo */
+    vertical-align: middle; /* Alinha o logo com o texto */
+}
