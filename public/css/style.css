@@ -49,17 +49,31 @@ header {
     background-color: var(--cor-primaria);
     padding: 20px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; /* Organiza os itens em coluna */
+    align-items: center; /* Centraliza os itens horizontalmente */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espaço entre logo e título */
+    margin-bottom: 15px; /* Espaço abaixo do título/logo */
+}
+
+header h1 {
+    color: var(--cor-texto-claro);
+    font-size: 3em; /* Tamanho grande para o título */
+    margin: 0;
+    font-weight: 700;
+}
+
 .header-logo {
-    height: 80px; /* Reduzido de 120px */
-    width: auto; /* Mantém a proporção */
+    height: 60px; /* Tamanho ajustado */
+    width: auto;
 }
 
 nav ul {
@@ -67,10 +81,12 @@ nav ul {
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: center; /* Centraliza a lista de navegação */
+    width: 100%;
 }
 
 nav li {
-    margin-left: 20px;
+    margin: 0 15px; /* Espaçamento ajustado */
 }
 
 nav a {
@@ -155,6 +171,13 @@ main {
 .news-item-list h3 {
     margin-top: 0;
     color: var(--cor-primaria);
+}
+
+/* --- Detalhes da Notícia --- */
+.news-detail-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 /* --- Contact Form Styles --- */
@@ -328,3 +351,55 @@ footer {
     display: flex;
     justify-content: flex-end;
 }
+
+#about {
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria); /* Alterado para verde claro, conforme solicitado */
+    padding: 40px 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+#about h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#about p {
+    font-size: 1.4em; /* Aumentado o texto */
+    line-height: 1.7; /* Aumentado o espaçamento */
+    font-weight: 500; /* Levemente mais destacado */
+}
+
+#highlights {
+    text-align: center;
+    margin: 40px auto;
+    max-width: 900px;
+}
+
+#highlights h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--cor-primaria);
+}
+
+.highlight-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.highlight-item {
+    border: 2px solid var(--cor-terciaria);
+    transform: scale(1.05);
+}
+
+.news-detail-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
