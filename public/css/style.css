@@ -1,4 +1,8 @@
 /* Estilos Globais */
+* {
+    box-sizing: border-box;
+}
+
 :root {
     --cor-primaria: #042D1C; /* Verde Escuro */
     --cor-secundaria: #539926; /* Verde Claro */
@@ -14,6 +18,7 @@ body {
     background-color: var(--cor-fundo);
     color: var(--cor-texto-escuro);
     position: relative; /* Necessário para o z-index do pseudo-elemento */
+    box-sizing: border-box; /* Adicionado para melhor controle de layout */
 }
 
 body::before {
@@ -106,7 +111,6 @@ main {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    gap: 20px;
     text-align: left;
 }
 
@@ -114,13 +118,41 @@ main {
     background-color: var(--cor-texto-claro);
     border: 1px solid #ddd;
     padding: 20px;
-    width: calc(33% - 40px);
+    flex-basis: 30%; /* Ajuste direto para 3 colunas */
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     border-radius: 5px;
-    min-width: 250px;
+    margin: 0 10px 20px 10px; /* Espaçamento manual para cada item */
+}
+
+.news-item-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
 
 .news-item h3 {
+    margin-top: 0;
+    color: var(--cor-primaria);
+}
+
+/* Estilos para a página de Notícias */
+#news-list {
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.news-item-list {
+    background-color: var(--cor-texto-claro);
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 5px;
+    text-align: left;
+}
+
+.news-item-list h3 {
     margin-top: 0;
     color: var(--cor-primaria);
 }
