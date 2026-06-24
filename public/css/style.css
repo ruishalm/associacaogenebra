@@ -66,8 +66,9 @@ header {
 
 header h1 {
     color: var(--cor-texto-claro);
-    font-size: 3em; /* Tamanho grande para o título */
+    font-size: 3em;
     margin: 0;
+    margin-left: 20px; /* Adiciona uma margem à esquerda para separar do logo */
     font-weight: 700;
 }
 
