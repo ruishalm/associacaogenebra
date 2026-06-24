@@ -1,10 +1,11 @@
 /* Estilos Globais */
 :root {
-    --cor-primaria: #2c3e50; /* Azul Escuro */
-    --cor-secundaria: #e74c3c; /* Vermelho Alaranjado */
-    --cor-fundo: #ecf0f1; /* Cinza Claro */
-    --cor-texto-escuro: #34495e; /* Cinza Ardósia */
-    --cor-texto-claro: #ffffff;
+    --cor-primaria: #042D1C; /* Verde Escuro */
+    --cor-secundaria: #539926; /* Verde Claro */
+    --cor-terciaria: #FFB533; /* Amarelo/Dourado */
+    --cor-fundo: #FAFAF9; /* Branco Sujo */
+    --cor-texto-escuro: #042D1C; /* Verde Escuro */
+    --cor-texto-claro: #FFFFFF; /* Branco */
 }
 
 body {
@@ -12,6 +13,22 @@ body {
     margin: 0;
     background-color: var(--cor-fundo);
     color: var(--cor-texto-escuro);
+    position: relative; /* Necessário para o z-index do pseudo-elemento */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/logos/LOGOTIPO.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50%; /* Reduzido o zoom */
+    opacity: 0.1; /* Menos transparente */
+    z-index: -1; /* Coloca o pseudo-elemento atrás do conteúdo do body */
 }
 
 a {
@@ -24,12 +41,20 @@ a:hover {
 }
 
 header {
-    background-color: var(--cor-texto-claro);
+    background-color: var(--cor-primaria);
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-logo {
+    height: 80px; /* Reduzido de 120px */
+    width: auto; /* Mantém a proporção */
 }
 
 nav ul {
@@ -44,9 +69,12 @@ nav li {
 }
 
 nav a {
+    color: var(--cor-texto-claro);
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 5px; /* Espaço para a linha */
 }
 
 main {
@@ -56,8 +84,16 @@ main {
 #hero {
     text-align: center;
     padding: 40px 20px;
-    background-color: var(--cor-texto-claro);
+    background-color: rgba(255, 255, 255, 0.7); /* Branco com 70% de opacidade */
     margin: -20px -20px 20px -20px; /* Expande para preencher o padding do main */
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 #about, #news {
@@ -125,7 +161,7 @@ main {
 #contact-form button {
     margin-top: 20px;
     padding: 12px;
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-primaria);
     color: var(--cor-texto-claro);
     border: none;
     border-radius: 4px;
@@ -136,7 +172,7 @@ main {
 }
 
 #contact-form button:hover {
-    background-color: #c0392b; /* Tom mais escuro de vermelho */
+    background-color: var(--cor-secundaria);
 }
 
 /* --- Gallery Styles --- */
@@ -155,7 +191,8 @@ main {
 
 .gallery-item img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
@@ -163,6 +200,26 @@ main {
 
 .gallery-item img:hover {
     transform: scale(1.05);
+}
+
+.framed-image {
+    position: relative;
+    aspect-ratio: 4 / 3; /* Proporção das imagens 400x300 */
+    overflow: hidden; /* Garante que o hover da imagem não ultrapasse a moldura */
+}
+
+.framed-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../img/frames/MascaraVideo_Horizontal.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* --- About Page Styles --- */
@@ -187,7 +244,7 @@ main {
     justify-content: center;
     padding: 10px 20px;
     margin-top: 20px;
-    background-color: #25D366;
+    background-color: var(--cor-primaria);
     color: white;
     border-radius: 5px;
     text-decoration: none;
@@ -197,21 +254,13 @@ main {
 }
 
 .whatsapp-button:hover {
-    background-color: #1DA851;
+    background-color: var(--cor-secundaria);
     text-decoration: none;
 }
 
 .whatsapp-button svg {
     width: 24px;
     height: 24px;
-}
-
-nav a {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 14px;
-    position: relative;
-    padding-bottom: 5px; /* Espaço para a linha */
 }
 
 nav a::after {
@@ -221,7 +270,7 @@ nav a::after {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-terciaria);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -240,4 +289,10 @@ footer {
     padding: 20px;
     width: 100%;
     margin-top: 40px; /* Adiciona espaço antes do rodapé */
+}
+
+.footer-personal-logo {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
 }
