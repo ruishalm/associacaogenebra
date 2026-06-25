@@ -1,0 +1,211 @@
+/*
+ * Animation for the header title "Fazenda Genebra" - V2 (Corrected)
+ */
+
+.header-title-container {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+@keyframes textFadeInOut {
+    0% { opacity: 1; }
+    5% { opacity: 0; } /* Desaparece rapidamente */
+    90% { opacity: 0; } /* Permanece invisível durante a maior parte da animação */
+    100% { opacity: 1; } /* Reaparece no final */
+}
+
+.header-title-text {
+    position: relative;
+    z-index: 10;
+    color: var(--cor-texto-claro); /* Sempre visível quando não há hover */
+    font-size: 3em;
+    margin: 0;
+    font-weight: 700;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: text-shadow 0.3s ease; /* Manter transição apenas para text-shadow */
+    text-shadow: none; /* Iniciar sem text-shadow */
+    opacity: 1; /* Iniciar visível */
+}
+
+.header-title-container:hover .header-title-text {
+    text-shadow:
+        -1px -1px 0 var(--cor-primaria), /* Borda verde escura */
+         1px -1px 0 var(--cor-primaria),
+        -1px  1px 0 var(--cor-primaria),
+         1px  1px 0 var(--cor-primaria);
+    animation: textFadeInOut 2.5s forwards; /* Aplica a animação no hover */
+}
+
+.animation-stage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 120%;
+    height: 120%;
+    background-color: white;
+    border-radius: 15px;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    overflow: hidden;
+    transform-origin: center;
+}
+
+.header-title-container:hover .animation-stage {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animation-icon {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(0);
+}
+
+/* --- New Animation Elements --- */
+
+/* Green Lines (Horizontal) */
+.green-line {
+    background-color: var(--cor-secundaria); /* Verde Claro */
+    height: 4px; /* Mais fina para parecer linha */
+    left: 0; /* Ocupa toda a largura */
+    transform-origin: left;
+    transform: scaleX(0); /* Cresce horizontalmente */
+    opacity: 1; /* Permanece visível */
+    width: 100%; /* Ocupa toda a largura do container */
+}
+.line1 { bottom: 0; } /* Começa na base */
+.line2 { bottom: 6px; }
+.line3 { bottom: 12px; }
+.line4 { bottom: 18px; }
+
+/* Big Sun (semicircle with stripes) */
+.sun {
+    background: linear-gradient(
+        to bottom,
+        #FFB533, #FFB533 calc(100%/11 * 1), /* Faixa 1 */
+        white calc(100%/11 * 1), white calc(100%/11 * 2), /* Espaço 1 */
+        #FFB533 calc(100%/11 * 2), #FFB533 calc(100%/11 * 3), /* Faixa 2 */
+        white calc(100%/11 * 3), white calc(100%/11 * 4), /* Espaço 2 */
+        #FFB533 calc(100%/11 * 4), #FFB533 calc(100%/11 * 5), /* Faixa 3 */
+        white calc(100%/11 * 5), white calc(100%/11 * 6), /* Espaço 3 */
+        #FFB533 calc(100%/11 * 6), #FFB533 calc(100%/11 * 7), /* Faixa 4 */
+        white calc(100%/11 * 7), white calc(100%/11 * 8), /* Espaço 4 */
+        #FFB533 calc(100%/11 * 8), #FFB533 calc(100%/11 * 9), /* Faixa 5 */
+        white calc(100%/11 * 9), white calc(100%/11 * 10), /* Espaço 5 */
+        #FFB533 calc(100%/11 * 10), #FFB533 calc(100%/11 * 11)  /* Faixa 6 */
+    );
+    width: 100px;
+    height: 50px; /* Metade da largura para um semicírculo */
+    border-radius: 50px 50px 0 0; /* Arredondado em cima, reto embaixo */
+    bottom: 20px; /* Abaixou um pouco */
+    left: 50%;
+    margin-left: -50px;
+    transform: translateY(50px); /* Começa mais baixo */
+    opacity: 0;
+    z-index: 0; /* Certifica-se de que está atrás das outras animações */
+}
+
+/* Trees with varied sizes */
+.tree {
+    background-image: url('../img/icones/arvore.png');
+    bottom: 22px; /* Revertido para a posição original */
+    transform-origin: bottom center;
+}
+.tree.small { width: 25px; height: 30px; }
+.tree.medium { width: 30px; height: 38px; }
+.tree.large { width: 35px; height: 45px; }
+
+/* Tree Group 1 */
+.tree1 { left: 10%; }
+.tree2 { left: 20%; }
+.tree3 { left: 30%; }
+
+/* Tree Group 2 */
+.tree4 { left: 65%; }
+.tree5 { left: 75%; }
+.tree6 { left: 85%; }
+
+
+/* Community Icons */
+.house, .people {
+    background-image: url('../img/icones/casinha.png'); /* Usar casinha para todos, pessoas serão overlay se houver */
+    bottom: 5px; /* Ajustado para descer */
+    transform-origin: bottom center;
+}
+.house.small, .people.small { width: 25px; height: 25px; }
+.house.medium, .people.medium { width: 30px; height: 30px; }
+.house.large, .people.large { width: 35px; height: 35px; }
+
+/* Community Group Left */
+.house1 { left: 10%; }
+.people1 { left: 18%; }
+.house4 { left: 25%; }
+
+/* Community Group Center */
+.house2 { left: 45%; }
+.people2 { left: 53%; }
+.house5 { left: 60%; }
+
+/* Community Group Right */
+.house3 { right: 10%; }
+.people3 { right: 18%; }
+.house6 { right: 25%; }
+
+
+/* --- HOVER ANIMATION SEQUENCE V2 --- */
+
+/* 1. Green lines rise up (starts at 1s) */
+.header-title-container:hover .green-line {
+    transform: scaleX(1);
+    opacity: 1;
+}
+.header-title-container:hover .line1 { transition-delay: 1s; }
+.header-title-container:hover .line2 { transition-delay: 1.2s; }
+.header-title-container:hover .line3 { transition-delay: 1.1s; }
+.header-title-container:hover .line4 { transition-delay: 1.3s; }
+
+/* 2. Sun rises (starts at 1.2s) */
+.header-title-container:hover .sun {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.2s;
+    transition-duration: 1s;
+}
+
+/* 3. Trees and houses sprout (starts at 1.5s) */
+.header-title-container:hover .tree,
+.header-title-container:hover .house,
+.header-title-container:hover .people {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Staggered appearance */
+.header-title-container:hover .tree1 { transition-delay: 1.5s; }
+.header-title-container:hover .tree2 { transition-delay: 1.6s; }
+.header-title-container:hover .tree3 { transition-delay: 1.7s; }
+
+.header-title-container:hover .house1 { transition-delay: 1.8s; }
+.header-title-container:hover .people1 { transition-delay: 1.9s; }
+.header-title-container:hover .house4 { transition-delay: 2.0s; } /* Nova casa */
+
+.header-title-container:hover .tree4 { transition-delay: 1.55s; }
+.header-title-container:hover .tree5 { transition-delay: 1.65s; }
+.header-title-container:hover .tree6 { transition-delay: 1.75s; }
+
+.header-title-container:hover .house2 { transition-delay: 1.85s; }
+.header-title-container:hover .people2 { transition-delay: 1.95s; }
+.header-title-container:hover .house5 { transition-delay: 2.05s; } /* Nova casa */
+
+.header-title-container:hover .house3 { transition-delay: 1.82s; }
+.header-title-container:hover .people3 { transition-delay: 1.92s; }
+.header-title-container:hover .house6 { transition-delay: 2.02s; } /* Nova casa */

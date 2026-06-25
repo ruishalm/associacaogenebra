@@ -339,6 +339,14 @@ nav a:hover::after {
     transform-origin: left;
 }
 
+.highlight-text-hero {
+    font-weight: 700; /* Mais destaque */
+    color: var(--cor-primaria); /* Verde escuro */
+    font-size: 1.5em; /* Um pouco maior */
+    line-height: 1.2;
+    display: block; /* Para ocupar sua própria linha e centralizar */
+    margin-top: 10px;
+}
 
 footer {
     background-color: var(--cor-primaria);
