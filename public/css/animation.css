@@ -57,7 +57,7 @@
 .header-title-container:hover .animation-stage {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    transition-duration: 1s;
+    transition-duration: 0.25s; /* Reduzido ainda mais */
     transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
@@ -111,7 +111,7 @@
     margin-left: -50px;
     transform: translateY(50px); /* Começa mais baixo */
     opacity: 0;
-    z-index: 0; /* Certifica-se de que está atrás das outras animações */
+    z-index: -1; /* Z-index menor */
 }
 
 /* Trees with varied sizes */
