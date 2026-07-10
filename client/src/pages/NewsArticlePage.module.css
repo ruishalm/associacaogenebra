@@ -1,0 +1,13 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  line-height: 1.8;
+  color: #4b5c50;
+}
+
+.backLink {
+  margin-top: 8px;
+  font-weight: 700;
+  color: var(--cor-secundaria);
+}

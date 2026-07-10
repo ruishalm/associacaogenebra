@@ -1,0 +1,26 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  padding: 12px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(4, 45, 28, 0.06), rgba(83, 153, 38, 0.08));
+  border: 1px solid rgba(4, 45, 28, 0.08);
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.caption {
+  margin-top: 10px;
+  color: #4b5c50;
+  line-height: 1.6;
+}

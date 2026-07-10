@@ -1,0 +1,69 @@
+.content {
+  display: grid;
+  gap: 18px;
+}
+
+.infoCard {
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(4, 45, 28, 0.06), rgba(83, 153, 38, 0.08));
+  border: 1px solid rgba(4, 45, 28, 0.08);
+}
+
+.infoCard p {
+  margin: 0;
+  line-height: 1.8;
+  color: #4b5c50;
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+
+.label {
+  display: grid;
+  gap: 6px;
+  color: var(--cor-primaria);
+  font-weight: 700;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border: 1px solid rgba(4, 45, 28, 0.16);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.button {
+  justify-self: start;
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 16px;
+  background: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.whatsappButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  color: var(--cor-secundaria);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.whatsappButton svg {
+  width: 22px;
+  height: 22px;
+}

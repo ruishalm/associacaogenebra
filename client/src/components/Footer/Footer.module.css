@@ -1,0 +1,22 @@
+.footer {
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.footerPersonalLogo {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoLink {
+  color: var(--cor-terciaria);
+  font-weight: 700;
+  text-decoration: none;
+}

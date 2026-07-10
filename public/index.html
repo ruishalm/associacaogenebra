@@ -1,154 +1,89 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Associação de Moradores do Bairro Genebra</title>
-    <link rel="icon" href="img/cards/LOGOTIPO_FUNDOBRANCO.png" type="image/png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/logo.css">
-    <link rel="stylesheet" href="css/personal-logo.css">
-    <link rel="stylesheet" href="css/animation.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <a href="index.html" class="logo-link" title="Página Inicial">
-                <img src="img/logos/LOGOTIPO_BRANCO.png" alt="Logo da Associação do Bairro Genebra" class="header-logo">
-            </a>
-            <div class="header-title-container">
-                <h1 class="header-title-text">Fazenda Genebra</h1>
-                <div class="animation-stage">
-                    <div class="animation-icon green-line line1"></div>
-                    <div class="animation-icon green-line line2"></div>
-                    <div class="animation-icon green-line line3"></div>
-                    <div class="animation-icon green-line line4"></div>
-                    <div class="animation-icon sun"></div>
-                    <!-- Tree Group 1 -->
-                    <div class="animation-icon tree tree1 small"></div>
-                    <div class="animation-icon tree tree2 medium"></div>
-                    <div class="animation-icon tree tree3 large"></div>
-                    <!-- Tree Group 2 -->
-                    <div class="animation-icon tree tree4 medium"></div>
-                    <div class="animation-icon tree tree5 large"></div>
-                    <div class="animation-icon tree tree6 small"></div>
-                    <!-- Community Group Left -->
-                    <div class="animation-icon house house1 medium"></div>
-                    <div class="animation-icon people people1 small"></div>
-                    <div class="animation-icon house house4 small"></div>
-                    <!-- Community Group Center -->
-                    <div class="animation-icon house house2 large"></div>
-                    <div class="animation-icon people people2 medium"></div>
-                    <div class="animation-icon house house5 small"></div>
-                    <!-- Community Group Right -->
-                    <div class="animation-icon house house3 medium"></div>
-                    <div class="animation-icon people people3 large"></div>
-                    <div class="animation-icon house house6 small"></div>
-                </div>
-            </div>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="pages/sobre.html">Sobre Nós</a></li>
-                <li><a href="pages/noticias.html">Notícias</a></li>
-                <li><a href="pages/contato.html">Contato</a></li>
-                <li><a href="pages/galeria.html">Galeria</a></li>
-            </ul>
-        </nav>
-    </header>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
 
-    <main>
-        <section id="hero">
-            <h1>Associação de moradores do bairro Genebra</h1>
-            <p>Alumínio</p>
-            <p><span class="highlight-text-hero">Juntos somos mais fortes.</span></p>
-        </section>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/12.16.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/12.16.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/12.16.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/12.16.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.16.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/12.16.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/12.16.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/12.16.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/12.16.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/12.16.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-        <section id="about">
-            <h2>Sobre Nós</h2>
-            <p>A Associação de Moradores do Bairro Genebra é o elo que une nossa comunidade. Somos uma organização sem fins lucrativos, formada por vizinhos e para os vizinhos, com o único propósito de lutar por um bairro melhor e mais justo para todos. Atuamos de forma transparente e combativa na representação dos interesses dos moradores junto ao poder público, cobrando melhorias essenciais em infraestrutura, segurança, saneamento, lazer e cultura. Mais do que isso, fomentamos a união e a participação de todos, pois acreditamos que a força da nossa comunidade reside no trabalho conjunto. Junte-se a nós nesta causa!</p>
-        </section>
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
 
-        <section id="highlights">
-            <h2>Destaques</h2>
-            <div class="highlight-container">
-                <article class="highlight-item">
-                    <h3>Campanha de Castração Gratuita</h3>
-                    <div class="highlight-content">
-                        <img src="img/cards/castracao.png" alt="Cartaz da campanha de castração gratuita com informações sobre o evento" class="highlight-image">
-                        <div class="highlight-text">
-                            <p><strong>🚨 ATENÇÃO, TUTORES DE CÃES E GATOS! Últimas vagas para a Castração Gratuita!</strong></p>
-                            <p>Se você ainda não garantiu a vaga do seu pet, esta é a hora. O cadastro presencial continua sendo obrigatório. A ação é uma parceria com o Vereador Professor Jediel, Deputado Vitão do Cachorrão, SPASO, e Vereador Raimundo, visando promover mais saúde e bem-estar para os animais do nosso município.</p>
-                            <p><strong>Castração:</strong> 30 de junho, na Biblioteca Municipal, das 09h às 15h. As vagas são limitadas!</p>
-                            <a href="pages/noticia-castracao.html">Leia mais</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
-        <section id="news">
-            <h2>Notícias Recentes</h2>
-            <div class="news-container">
-                <article class="news-item">
-                    <img src="img/cards/LOGOTIPO.png" alt="Logo da Associação do Bairro Genebra" class="news-item-image">
-                    <h3>Resumo da Reunião da Associação</h3>
-                    <p>Olá, vizinhos! Aqui é a Vivian. Trago o resumo das decisões da nossa reunião do dia 20 de junho, realizada no Restaurante JS...</p>
-                    <a href="pages/noticia-reuniao-associacao.html">Leia mais</a>
-                </article>
-                <article class="news-item">
-                    <img src="img/caldo.jpg" alt="Foto do antigo caldo de cana, ponto de referência que foi demolido" class="news-item-image">
-                    <h3>Memória e Continuidade: O Legado no Genebra</h3>
-                    <p>Olá, vizinhos. Aqui é a Vivian. Hoje o nosso comunicado é de memória e prestação de contas. No dia 9 de março, representei a nossa Associação...</p>
-                    <a href="pages/noticia-legado-genebra.html">Leia mais</a>
-                </article>
-                <article class="news-item">
-                    <img src="img/cards/LOGOTIPO.png" alt="Logo da Associação do Bairro Genebra" class="news-item-image">
-                    <h3>Os Impactos do Pedágio Free Flow no Genebra</h3>
-                    <p>Olá, vizinhos! Precisamos falar sobre um assunto muito sério que afeta a todos nós: a instalação do pedágio Free Flow no km 82,3 da Raposo Tavares...</p>
-                    <a href="pages/noticia-pedagio-free-flow.html">Leia mais</a>
-                </article>
-                <article class="news-item">
-                    <img src="img/cards/LOGOTIPO.png" alt="Logo da Associação do Bairro Genebra" class="news-item-image">
-                    <h3>O Desafio das Nossas Estradas</h3>
-                    <p>Olá, vizinhos! Hoje vamos falar sobre as condições das nossas estradas. A falta de infraestrutura afeta muito a nossa mobilidade...</p>
-                    <a href="pages/noticia-desafio-estradas.html">Leia mais</a>
-                </article>
-                <article class="news-item">
-                    <img src="img/cards/LOGOTIPO.png" alt="Logo da Associação do Bairro Genebra" class="news-item-image">
-                    <h3>A Luta por Cultura e Esporte no Genebra</h3>
-                    <p>O Bairro Genebra tem hoje cerca de 8 mil moradores. Desse total, quase 30% são crianças e jovens, e 25% são idosos...</p>
-                    <a href="pages/noticia-cultura-esporte.html">Leia mais</a>
-                </article>
-                <article class="news-item">
-                    <img src="img/cards/LOGOTIPO.png" alt="Logo da Associação do Bairro Genebra" class="news-item-image">
-                    <h3>Cobranças e Obras Atrasadas</h3>
-                    <p>Olá, vizinhos! Aqui é a Vivian. Hoje trago um resumo técnico das nossas cobranças à Prefeitura de Alumínio...</p>
-                    <a href="pages/noticia-obras-atrasadas.html">Leia mais</a>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Associação de Moradores do Bairro Genebra. Todos os direitos reservados.</p>
-        <div class="footer-personal-logo">
-            <span>Site produzido por: </span>
-            <a href="https://github.com/ruishalm" class="svg-logo-link" title="Desenvolvido por Rafa Munhoz" target="_blank" rel="noopener noreferrer">
-              <svg class="rafa-munhoz-logo inverse small" viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg">
-                <rect class="logo-bg-capsule" x="-10" y="-5" width="240" height="50" rx="25"/>
-                <path class="logo-flair" transform="translate(-5, -5) scale(2.0)" d="M5,0.7 L9.33,7.5 L0.67,7.5 Z M5,9.3 L0.67,2.5 L9.33,2.5 Z" />
-                <text x="20" y="27">
-                    <tspan class="logo-first-name">Rafa</tspan><tspan class="logo-last-name"> Munhoz</tspan>
-                </text>
-                <path class="logo-underline" d="M20 35 H 215" />
-              </svg>
-            </a>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
-</body>
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
 </html>

@@ -1,0 +1,93 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 45, 28, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2000;
+}
+
+.modal {
+  position: relative;
+  width: min(100%, 460px);
+  background: var(--cor-texto-claro);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 20px 45px rgba(4, 45, 28, 0.22);
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  background: transparent;
+  font-size: 1.7rem;
+  cursor: pointer;
+  color: var(--cor-primaria);
+}
+
+.header h2 {
+  margin: 0 0 6px;
+  color: var(--cor-primaria);
+}
+
+.header p {
+  margin: 0 0 16px;
+  color: #4b5c50;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--cor-primaria);
+}
+
+.form input {
+  padding: 10px 12px;
+  border: 1px solid rgba(4, 45, 28, 0.16);
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.submitButton,
+.switchButton {
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submitButton {
+  margin-top: 4px;
+  background: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+}
+
+.switchButton {
+  background: transparent;
+  color: var(--cor-secundaria);
+  margin-top: 12px;
+  padding: 0;
+}
+
+.error {
+  color: #b42318;
+  font-size: 0.95rem;
+}
+
+.success {
+  color: #16724d;
+  font-size: 0.95rem;
+}

@@ -1,0 +1,30 @@
+.content {
+  display: grid;
+  gap: 16px;
+}
+
+.content p {
+  margin: 0;
+  line-height: 1.8;
+  color: #4b5c50;
+}
+
+.highlightBox {
+  margin-top: 8px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(4, 45, 28, 0.06), rgba(83, 153, 38, 0.08));
+  border: 1px solid rgba(4, 45, 28, 0.08);
+}
+
+.highlightBox strong {
+  color: var(--cor-primaria);
+}
+
+.list {
+  margin: 6px 0 0;
+  padding-left: 20px;
+  color: #4b5c50;
+  display: grid;
+  gap: 8px;
+}

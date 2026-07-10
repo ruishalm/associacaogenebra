@@ -1,0 +1,45 @@
+:root {
+  --cor-primaria: #042d1c;
+  --cor-secundaria: #539926;
+  --cor-terciaria: #ffb533;
+  --cor-fundo: #fafaf9;
+  --cor-texto-escuro: #042d1c;
+  --cor-texto-claro: #ffffff;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--cor-texto-escuro);
+  background-color: var(--cor-fundo);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto-escuro);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: var(--cor-secundaria);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+}
