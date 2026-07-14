@@ -28,3 +28,61 @@
   display: grid;
   gap: 8px;
 }
+
+.profileActions {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.adminButton,
+.logoutButton {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.adminButton {
+  background-color: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  border: 1px solid var(--cor-primaria);
+}
+
+.adminButton:hover {
+  background-color: var(--cor-secundaria);
+  border-color: var(--cor-secundaria);
+  text-decoration: none;
+}
+
+.logoutButton {
+  background-color: transparent;
+  color: var(--cor-primaria);
+  border: 1px solid var(--cor-primaria);
+}
+
+.logoutButton:hover {
+  background-color: rgba(4, 45, 28, 0.05);
+  text-decoration: none;
+}
+
+.loginBox {
+  text-align: center;
+}
+
+.loginBox p {
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: var(--cor-primaria);
+}
+
+.loadingBox p {
+  text-align: center;
+  font-style: italic;
+  color: #4b5c50;
+}

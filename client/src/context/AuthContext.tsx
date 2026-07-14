@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { onAuthStateChanged, signOut as firebaseSignOut, type User as FirebaseUser } from 'firebase/auth';
+import { onAuthStateChanged, signOut as firebaseSignOut, type User } from 'firebase/auth'; // Corrigido
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 
@@ -10,7 +10,7 @@ interface UserProfile {
 }
 
 interface AuthContextValue {
-  currentUser: FirebaseUser | null;
+  currentUser: User | null; // Corrigido
   userProfile: UserProfile | null;
   loading: boolean;
   signOut: () => Promise<void>;
@@ -22,14 +22,14 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-const buildProfile = (user: FirebaseUser, existingProfile?: Partial<UserProfile>): UserProfile => ({
+const buildProfile = (user: User, existingProfile?: Partial<UserProfile>): UserProfile => ({
   displayName: existingProfile?.displayName ?? user.displayName ?? user.email?.split('@')[0] ?? 'Morador',
   email: user.email ?? '',
   association: existingProfile?.association ?? 'Alumínio',
 });
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null); // Corrigido
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 

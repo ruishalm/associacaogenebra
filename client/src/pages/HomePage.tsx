@@ -1,45 +1,80 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { collection, getDocs, query, where, orderBy, limit } from 'firebase/firestore';
+import { db } from '../firebase';
 import NewsCard from '../components/NewsCard/NewsCard';
 import Section from '../components/Section/Section';
 import styles from './HomePage.module.css';
+import { useAuth } from '../context/AuthContext';
+import { deleteNewsArticle } from '../components/NewsCard/news.service';
 
-import castracaoImage from '../assets/img/cards/castracao.png';
-import caldoImage from '../assets/img/legacy/caldo.jpg';
-import abaixoAssinadoImage from '../assets/img/news/abaixo-assinado.png';
-import reuniaoSegurancaImage from '../assets/img/news/reuniao07-07.jpg';
-
-const featuredNews = [
-  {
-    title: 'Campanha de Castração Gratuita',
-    description: 'Últimas vagas para a campanha e informações importantes para tutores de cães e gatos.',
-    image: castracaoImage,
-    alt: 'Cartaz da campanha de castração gratuita',
-    link: '/noticias/castracao-gratuita',
-  },
-  {
-    title: 'Segurança, Sossego e Ações no Genebra',
-    description: 'Resumo da reunião do CONSEG e das demandas da comunidade por mais segurança e fiscalização.',
-    image: reuniaoSegurancaImage,
-    alt: 'Reunião do CONSEG no bairro Genebra',
-    link: '/noticias/reuniao-seguranca',
-  },
-  {
-    title: 'Abaixo-Assinado por um Centro Cultural e Esportivo',
-    description: 'A associação e os moradores reivindicam um espaço de lazer e cultura para o bairro.',
-    image: abaixoAssinadoImage,
-    alt: 'Imagem do abaixo-assinado para um centro cultural e esportivo',
-    link: '/noticias/abaixo-assinado',
-  },
-  {
-    title: 'Memória e Continuidade: O Legado no Genebra',
-    description: 'Acompanhamento de um tema importante para a memória e o futuro do bairro.',
-    image: caldoImage,
-    alt: 'Foto do antigo caldo de cana',
-    link: '/noticias/legado-genebra',
-  },
-];
+interface NewsItem {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  body: string;
+  isPinned: boolean;
+}
 
 const HomePage = () => {
+  const [pinnedNews, setPinnedNews] = useState<NewsItem | null>(null);
+  const [recentNews, setRecentNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  const handleDelete = async (id: string, title: string, isPinned = false) => {
+    const message = isPinned
+      ? `Tem certeza que deseja excluir a notícia em DESTAQUE "${title}"?`
+      : `Tem certeza que deseja excluir a notícia "${title}"?`;
+
+    if (window.confirm(`${message} Esta ação não pode ser desfeita.`)) {
+      try {
+        await deleteNewsArticle(id);
+        if (isPinned) {
+          setPinnedNews(null);
+          // Recarrega a página para garantir que uma nova notícia (se houver) seja fixada.
+          // Uma abordagem mais sofisticada seria buscar a próxima notícia para fixar.
+          window.location.reload();
+        } else {
+          setRecentNews(prevNews => prevNews.filter(item => item.id !== id));
+        }
+      } catch (error) {
+        console.error('Erro ao excluir notícia:', error);
+        alert('Não foi possível excluir a notícia. Tente novamente.');
+      }
+    }
+  };
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const newsCollection = collection(db, 'news');
+
+        // Busca a notícia fixada
+        const pinnedQuery = query(newsCollection, where('isPinned', '==', true), limit(1));
+        const pinnedSnapshot = await getDocs(pinnedQuery);
+        if (!pinnedSnapshot.empty) {
+          setPinnedNews({ id: pinnedSnapshot.docs[0].id, ...pinnedSnapshot.docs[0].data() } as NewsItem);
+        }
+
+        // Busca as 4 notícias mais recentes (que não estão fixadas)
+        const recentQuery = query(newsCollection, where('isPinned', '==', false), orderBy('createdAt', 'desc'), limit(4));
+        const recentSnapshot = await getDocs(recentQuery);
+        const newsList = recentSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as NewsItem));
+        setRecentNews(newsList);
+
+      } catch (error) {
+        console.error("Erro ao buscar notícias da home:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
   return (
     <div className={styles.homePage}>
       <section className={styles.hero}>
@@ -70,24 +105,34 @@ const HomePage = () => {
         </p>
       </Section>
 
-      <Section title="Destaque da Semana" subtitle="Principais iniciativas e ações que movimentam o bairro.">
-        <div className={styles.highlightCard}>
-          <img src={abaixoAssinadoImage} alt="Imagem do abaixo-assinado para um centro cultural e esportivo" className={styles.highlightImage} />
-          <div className={styles.highlightText}>
-            <h3>Abaixo-Assinado por um Centro Cultural e Esportivo</h3>
-            <p>
-              Vários moradores têm procurado as associações para falar sobre a falta de locais de lazer no Genebra.
-              A proposta é reunir apoiadores e pressionar o poder público por um espaço adequado para cultura, esportes e oficinas.
-            </p>
-            <Link to="/noticias/abaixo-assinado" className={styles.highlightLink}>Leia mais</Link>
+      {!loading && pinnedNews && (
+        <Section title="Destaque da Semana" subtitle="Principais iniciativas e ações que movimentam o bairro.">
+          <div className={styles.highlightCard}>
+            <img src={pinnedNews.imageUrl} alt={pinnedNews.title} className={styles.highlightImage} />
+            <div className={styles.highlightText}>
+              <h3>{pinnedNews.title}</h3>
+              <p>{pinnedNews.description}</p>
+              <div className={styles.highlightActions}>
+                <Link to={`/noticias/${pinnedNews.id}`} className={styles.highlightLink}>Leia mais</Link>
+              </div>
+            </div>
           </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
       <Section title="Notícias Recentes" subtitle="Os principais assuntos que movimentam o bairro e a associação.">
         <div className={styles.cardsGrid}>
-          {featuredNews.map((item) => (
-            <NewsCard key={item.title} {...item} />
+          {loading && <p>Carregando...</p>}
+          {!loading && recentNews.length === 0 && <p>Nenhuma notícia recente encontrada.</p>}
+          {!loading && recentNews.map((item) => (
+            <NewsCard
+              key={item.id}
+              title={item.title}
+              description={item.description}
+              image={item.imageUrl}
+              alt={item.title}
+              link={`/noticias/${item.id}`}
+            />
           ))}
         </div>
       </Section>

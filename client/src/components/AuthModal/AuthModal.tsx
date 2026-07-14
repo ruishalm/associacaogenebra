@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase';
 import styles from './AuthModal.module.css';
@@ -18,6 +19,7 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
   const [accessCode, setAccessCode] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   if (!isOpen) {
     return null;
@@ -30,7 +32,7 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
 
     try {
       if (mode === 'signup') {
-        if (accessCode !== '0000') {
+        if (accessCode !== 'Delcinho') {
           setError('Código especial inválido.');
           return;
         }
@@ -48,14 +50,14 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
         });
         setSuccess('Conta criada com sucesso! Você já pode fazer o login.');
         setTimeout(() => {
-          onClose();
+          setMode('login');
+          setSuccess('');
         }, 3000); // Fecha o modal após 3 segundos
       } else {
         await signInWithEmailAndPassword(auth, email, password);
-        setSuccess('Login realizado com sucesso.');
+        navigate('/noticias');
       }
 
-      onClose();
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);

@@ -1,0 +1,30 @@
+.card {
+  background-color: var(--cor-fundo);
+  border: 1px solid rgba(4, 45, 28, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cor-primaria);
+  margin: 0;
+}
+
+.contact {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cor-secundaria);
+  margin: 0;
+}
+
+.details {
+  font-size: 0.85rem;
+  color: #4b5c50;
+  margin: 0;
+  line-height: 1.5;
+}

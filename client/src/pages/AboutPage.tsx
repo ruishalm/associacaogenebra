@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 import Section from '../components/Section/Section';
-import { useAuth } from '../context/AuthContext';
-import { auth } from '../firebase';
 import styles from './AboutPage.module.css';
+import { useAuth } from '../context/AuthContext';
 
 const AboutPage = () => {
-  const { userProfile, loading, currentUser } = useAuth(); // A função logout virá do AuthContext
+  const { currentUser, userProfile, signOut } = useAuth();
 
   return (
     <Section title="Sobre Nós" subtitle="A associação que representa e fortalece a comunidade do bairro Genebra.">
@@ -32,25 +31,19 @@ const AboutPage = () => {
           porque juntos somos mais fortes.
         </p>
 
-        {!loading && !currentUser && (
-          <div className={`${styles.highlightBox} ${styles.loginBox}`}>
-            <p>
-              Você é um administrador? <Link to="/admin">Acesse o painel aqui</Link>.
-            </p>
-          </div>
-        )}
-
-        {!loading && userProfile && currentUser && (
+        {currentUser && userProfile ? (
           <div className={`${styles.highlightBox} ${styles.profileBox}`}>
-            <strong>Perfil do Administrador</strong>
-            <ul className={styles.list}>
-              <li><strong>Nome:</strong> {userProfile.displayName}</li>
-              <li><strong>E-mail:</strong> {userProfile.email}</li>
-              <li><strong>Associação:</strong> {userProfile.association}</li>
-            </ul>
-            <button onClick={() => auth.signOut()} className={styles.logoutButton}>
-              Sair
-            </button>
+            <p><strong>Logado como:</strong> {userProfile.displayName}</p>
+            <p><strong>E-mail:</strong> {userProfile.email}</p>
+            <div className={styles.profileActions}>
+              <Link to="/admin" className={styles.adminButton}>Acessar Painel</Link>
+              <button onClick={signOut} className={`${styles.adminButton} ${styles.logoutButton}`}>Sair</button>
+            </div>
+          </div>
+        ) : (
+          <div className={`${styles.highlightBox} ${styles.loginBox}`}>
+            <p>Você é um administrador?</p>
+            <Link to="/admin" className={styles.adminButton}>Acessar Painel</Link>
           </div>
         )}
       </div>

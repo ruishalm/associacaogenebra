@@ -6,6 +6,7 @@ const links = [
   { to: '/sobre', label: 'Sobre Nós' },
   { to: '/noticias', label: 'Notícias' },
   { to: '/contato', label: 'Contato' },
+  { to: '/servicos', label: 'Serviços' },
   { to: '/galeria', label: 'Galeria' },
 ];
 
@@ -13,8 +14,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
-        <Link to="/" className={styles.brandLink} title="Página Inicial">
-          <img src="/img/logos/LogoBrancoAluminio.png" alt="Logo da Associação de Alumínio" className={styles.brandLogo} />
+        <Link to="/" className={styles.brandLink} title="Página Inicial">          
           <div className={styles.headerTitleContainer}>
             <div className={styles.titleWrapper}>
               <span className={styles.animationStage} aria-hidden="true">
@@ -42,8 +42,7 @@ const Header = () => {
               <h1 className={styles.headerTitleText}>Fazenda Genebra</h1>
             </div>
           </div>
-          <img src="/img/logos/LogoBrancoSorocaba.png" alt="Logo da Associação de Sorocaba" className={styles.brandLogo} />
-        </Link>
+        </Link>        
       </div>
       <nav className={styles.nav}>
         <ul>

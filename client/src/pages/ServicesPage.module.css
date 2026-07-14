@@ -1,0 +1,100 @@
+.servicesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.categoryTitle {
+  font-size: 1.8rem;
+  color: var(--cor-primaria);
+  border-bottom: 2px solid var(--cor-secundaria);
+  padding-bottom: 8px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.utilityGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.collapsibleSection {
+  /* O espaçamento agora é controlado pelo gap do .servicesContainer */
+}
+
+.collapsibleSection summary {
+  cursor: pointer;
+  list-style: none; /* Remove o marcador padrão */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.collapsibleSection summary::-webkit-details-marker {
+  display: none; /* Remove o marcador no Chrome/Safari */
+}
+
+.collapsibleSection summary::before {
+  content: '▶';
+  font-size: 0.8em;
+  transition: transform 0.2s;
+}
+
+.collapsibleSection[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.placeholderText {
+  color: #666;
+  font-style: italic;
+}
+
+.collapsibleContent {
+  padding-top: 24px;
+}
+
+/* Estilos para o card promocional */
+.promoCard {
+  background-color: var(--cor-texto-claro);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 16px rgba(4, 45, 28, 0.07);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border: 1px solid var(--cor-secundaria);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.promoCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(83, 153, 38, 0.15);
+}
+
+.promoCategory {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cor-secundaria);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.promoLogo {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.promoWhatsapp {
+  font-weight: 600;
+  color: #4b5c50;
+}

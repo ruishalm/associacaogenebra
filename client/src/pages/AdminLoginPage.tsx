@@ -2,25 +2,39 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthModal from '../components/AuthModal/AuthModal';
 import Section from '../components/Section/Section';
+import { useAuth } from '../context/AuthContext';
 import styles from './AdminLoginPage.module.css';
-
-const AdminLoginPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  return (
-    <>
-      <Section title="Acesso administrativo" subtitle="Área reservada para os administradores da associação.">
-        <div className={styles.card}>
-          <p>Use o formulário abaixo para entrar no painel simples de gestão de notícias e conteúdo.</p>
-          <button type="button" className={styles.button} onClick={() => setIsModalOpen(true)}>
-            Entrar ou criar conta
-          </button>
-          <Link to="/" className={styles.backLink}>Voltar para o site</Link>
-        </div>
-      </Section>
-      <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
-  );
-};
-
-export default AdminLoginPage;
+ 
+ const AdminLoginPage = () => {
+   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { currentUser, logout } = useAuth();
+ 
+   const openModal = () => setIsModalOpen(true);
+   const closeModal = () => setIsModalOpen(false);
+ 
+   return (
+     <>
+       {currentUser ? (
+         <Section title={`Bem-vindo, ${currentUser.displayName || 'Admin'}`} subtitle="Gerencie o conteúdo do site.">
+           <div className={styles.adminPanel}>
+             <Link to="/admin/postar-noticia" className={styles.adminButton}>
+               Postar Nova Notícia
+             </Link>
+             <button onClick={logout} className={`${styles.adminButton} ${styles.logoutButton}`}>
+               Sair (Logout)
+             </button>
+           </div>
+         </Section>
+       ) : (
+         <Section title="Painel Administrativo" subtitle="Acesso restrito para gerenciamento do site.">
+           <div className={styles.container}>
+             <button onClick={openModal} className={styles.loginButton}>Acessar Painel</button>
+           </div>
+           <AuthModal isOpen={isModalOpen} onClose={closeModal} />
+         </Section>
+       )}
+     </>
+   );
+ };
+ 
+ export default AdminLoginPage;
