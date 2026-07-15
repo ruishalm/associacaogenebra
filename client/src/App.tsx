@@ -10,6 +10,7 @@ import ServicesPage from './pages/ServicesPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import NewPostPage from './pages/admin/NewPostPage';
 import EditPostPage from './pages/admin/EditPostPage';
+import NewGalleryItemPage from './pages/NewGalleryItemPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/admin" element={<AdminLoginPage />} />
           <Route path="/admin/postar-noticia" element={<NewPostPage />} />
           <Route path="/admin/editar-noticia/:slug" element={<EditPostPage />} />
+          <Route path="/admin/postar-foto" element={<NewGalleryItemPage />} />
         </Routes>
       </Layout>
     </Router>

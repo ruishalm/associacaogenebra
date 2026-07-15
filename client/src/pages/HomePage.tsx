@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { collection, getDocs, query, where, orderBy, limit } from 'firebase/firestore';
 import { db } from '../firebase';
 import NewsCard from '../components/NewsCard/NewsCard';
 import Section from '../components/Section/Section';
 import styles from './HomePage.module.css';
-import { useAuth } from '../context/AuthContext';
-import { deleteNewsArticle } from '../components/NewsCard/news.service';
 
 interface NewsItem {
   id: string;
@@ -21,31 +19,6 @@ const HomePage = () => {
   const [pinnedNews, setPinnedNews] = useState<NewsItem | null>(null);
   const [recentNews, setRecentNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const { currentUser } = useAuth();
-  const navigate = useNavigate();
-
-  const handleDelete = async (id: string, title: string, isPinned = false) => {
-    const message = isPinned
-      ? `Tem certeza que deseja excluir a notícia em DESTAQUE "${title}"?`
-      : `Tem certeza que deseja excluir a notícia "${title}"?`;
-
-    if (window.confirm(`${message} Esta ação não pode ser desfeita.`)) {
-      try {
-        await deleteNewsArticle(id);
-        if (isPinned) {
-          setPinnedNews(null);
-          // Recarrega a página para garantir que uma nova notícia (se houver) seja fixada.
-          // Uma abordagem mais sofisticada seria buscar a próxima notícia para fixar.
-          window.location.reload();
-        } else {
-          setRecentNews(prevNews => prevNews.filter(item => item.id !== id));
-        }
-      } catch (error) {
-        console.error('Erro ao excluir notícia:', error);
-        alert('Não foi possível excluir a notícia. Tente novamente.');
-      }
-    }
-  };
 
   useEffect(() => {
     const fetchNews = async () => {

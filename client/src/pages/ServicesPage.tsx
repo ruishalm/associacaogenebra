@@ -35,7 +35,7 @@ const publicServices = [
     name: 'CPFL Energia',
     category: 'Energia',
     contact: '📞 0800 010 1010',
-    links: [{ url: 'https://play.google.com/store/apps/details?id=br.gov.sp.policiamilitar.sp190&hl=pt_BR', text: 'App Google Play' }]
+    links: [{ url: 'https://play.google.com/store/apps/details?id=br.com.cpfl.android.autoatendimento&hl=pt_BR', text: 'App Google Play' }]
   },
   {
     name: 'Prefeituras',

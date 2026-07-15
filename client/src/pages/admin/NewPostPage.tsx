@@ -5,14 +5,12 @@ import { db } from '../../firebase';
 import Section from '../../components/Section/Section';
 import { useAuth } from '../../context/AuthContext';
 import styles from './NewPostPage.module.css';
-import { uploadImage } from '../../services/storage.service'; // O caminho já estava correto, mas confirmo a correção.
 
 const NewPostPage = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [body, setBody] = useState('');
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
+  const [imageUrl, setImageUrl] = useState('');
   const [isPinned, setIsPinned] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -33,12 +31,6 @@ const NewPostPage = () => {
     );
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImageFile(e.target.files[0]);
-    }
-  };
-  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -50,20 +42,12 @@ const NewPostPage = () => {
       return;
     }
 
-    let finalImageUrl = '';
-
     try {
-      if (imageFile) {
-        finalImageUrl = await uploadImage(imageFile, (progress) => {
-          setUploadProgress(progress);
-        });
-      }
-
       await addDoc(collection(db, 'news'), {
         title,
         description,
         body,
-        imageUrl: finalImageUrl,
+        imageUrl,
         isPinned,
         createdAt: serverTimestamp(),
       });
@@ -88,14 +72,9 @@ const NewPostPage = () => {
           <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} required />
         </label>
         <label>
-          Imagem da Notícia
-          <input type="file" accept="image/*" onChange={handleFileChange} />
+          URL da Imagem (ex: /img/news/minha-imagem.jpg)
+          <input type="text" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} />
         </label>
-        {uploadProgress !== null && uploadProgress < 100 && (
-          <div className={styles.progressContainer}>
-            <div className={styles.progressBar} style={{ width: `${uploadProgress}%` }} />
-          </div>
-        )}
         <label>
           Corpo da Notícia
           <textarea value={body} onChange={(e) => setBody(e.target.value)} rows={10} required />
