@@ -2,13 +2,17 @@ import { useState, useEffect } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
-import Section from '../components/Section/Section';
+import Section from '../components/Section/Section'; // Corrigindo o caminho
 import { useAuth } from '../context/AuthContext';
-import styles from './admin/NewPostPage.module.css';
+import styles from './admin/NewPostPage.module.css'; // Corrigindo o caminho
+import { uploadImage } from '../services/storage.service';
+
 const NewGalleryItemPage = () => {
   const [src, setSrc] = useState('');
   const [alt, setAlt] = useState('');
   const [caption, setCaption] = useState('');
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,20 +32,34 @@ const NewGalleryItemPage = () => {
     );
   }
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile(e.target.files[0]);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
-    if (!src || !caption) {
-      setError('URL da Imagem e Legenda são obrigatórios.');
+    if ((!src && !imageFile) || !caption) {
+      setError('Você precisa fornecer uma imagem (via upload ou URL) e uma legenda.');
       setLoading(false);
       return;
     }
 
+    let finalImageUrl = src;
+
     try {
+      if (imageFile) {
+        finalImageUrl = await uploadImage(imageFile, (progress) => {
+          setUploadProgress(progress);
+        }, 'gallery');
+      }
+
       await addDoc(collection(db, 'gallery'), {
-        src,
+        src: finalImageUrl,
         alt,
         caption,
         createdAt: serverTimestamp(),
@@ -58,9 +76,19 @@ const NewGalleryItemPage = () => {
   return (
     <Section title="Adicionar Foto à Galeria" subtitle="Preencha os campos para adicionar uma nova foto.">
       <form onSubmit={handleSubmit} className={styles.form}>
+        <p>Escolha <b>uma</b> das opções abaixo para a imagem:</p>
         <label>
-          URL da Imagem (ex: /img/minha-foto.jpg)
-          <input type="text" value={src} onChange={(e) => setSrc(e.target.value)} required />
+          1. Fazer upload de um arquivo
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+        </label>
+        {uploadProgress !== null && uploadProgress < 100 && (
+          <div className={styles.progressContainer}>
+            <div className={styles.progressBar} style={{ width: `${uploadProgress}%` }} />
+          </div>
+        )}
+        <label>
+          2. Ou colar a URL de uma imagem (ex: /img/minha-foto.jpg)
+          <input type="text" value={src} onChange={(e) => setSrc(e.target.value)} />
         </label>
         <label>
           Texto Alternativo (para acessibilidade)
